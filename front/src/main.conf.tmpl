@@ -1,0 +1,8 @@
+server {
+    listen              443 ssl;
+    server_name         YOUR_HOST_NAME;
+    ssl_certificate     /etc/letsencrypt/live/YOUR_HOST_NAME/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/YOUR_HOST_NAME/privkey.pem;
+
+    include /etc/nginx/conf.d/locations/*.conf
+}
