@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+        front:
+                image: santaent/front
+                network_mode: default
+                ports:
+                        - "80:80"
+                        - "443:443"
+                volumes:
+                        - type: bind
+                          source: /etc/letsencrypt
+                          target: /etc/letsencrypt
+                environment:
+                        - CERTBOT_EMAIL=macmini-254h@santa-ent.co.jp
+
+

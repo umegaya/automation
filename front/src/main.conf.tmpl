@@ -4,5 +4,12 @@ server {
     ssl_certificate     /etc/letsencrypt/live/YOUR_HOST_NAME/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/YOUR_HOST_NAME/privkey.pem;
 
-    include /etc/nginx/conf.d/locations/*.conf
+    location /health {
+        return 200 "automation server system alives";
+    }
+
+    location /worker {
+        # proxy_pass http://worker:8080/worker;
+	return 200 "it should forward to worker";
+    }
 }
