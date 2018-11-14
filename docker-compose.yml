@@ -2,7 +2,6 @@ version: "3.7"
 services:
         front:
                 image: santaent/front
-                network_mode: default
                 ports:
                         - "80:80"
                         - "443:443"
@@ -11,6 +10,28 @@ services:
                           source: /etc/letsencrypt
                           target: /etc/letsencrypt
                 environment:
-                        - CERTBOT_EMAIL=macmini-254h@santa-ent.co.jp
+                        - CERTBOT_EMAIL=${AMTN_CERTBOT_EMAIL}
+
+        worker:
+                image: santaent/worker
+                command: --prefix=/worker/8080
+                ports:
+                        - "8080:8080"
+                volumes:
+                        - type: volume
+                          source: worker_storage
+                          target: /var/jenkins_home
+                        - type: bind
+                          source: /var/run/docker.sock
+                          target: /var/run/docker.sock
+                        - type: bind
+                          source: ${HOME}/.docker/machine
+                          target: /root/.docker/machine
+                        - type: bind
+                          source: /etc/letsencrypt
+                          target: /etc/letsencrypt
+
+volumes:
+        worker_storage:
 
 
