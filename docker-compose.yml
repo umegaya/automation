@@ -1,26 +1,26 @@
 version: "3.7"
 services:
         front:
-                image: santaent/front
+                image: ${AMTN_FRONT_IMAGE}
                 ports:
                         - "80:80"
                         - "443:443"
                 volumes:
                         - type: bind
-                          source: /etc/letsencrypt
+                          source: ${AMTN_FRONT_CERTDIR_IN_HOST}
                           target: /etc/letsencrypt
                 environment:
                         - CERTBOT_EMAIL=${AMTN_CERTBOT_EMAIL}
 
         worker:
-                image: santaent/worker
+                image: ${AMTN_WORKER_IMAGE}
                 command: --prefix=/worker/8080
                 ports:
                         - "8080:8080"
                 volumes:
                         - type: bind
-                          source: /var/jenkins_home
-                          target: /var/jenkins_home
+                          source: ${AMTN_WORKER_WORKDIR_IN_HOST}
+                          target: ${AMTN_WORKER_WORKDIR}
                         - type: bind
                           source: /var/run/docker.sock
                           target: /var/run/docker.sock
@@ -28,7 +28,7 @@ services:
                           source: ${HOME}/.docker/machine
                           target: /root/.docker/machine
                         - type: bind
-                          source: /etc/letsencrypt
+                          source: ${AMTN_FRONT_CERTDIR_IN_HOST}
                           target: /etc/letsencrypt
 
 
