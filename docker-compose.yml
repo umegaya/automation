@@ -18,8 +18,8 @@ services:
                 ports:
                         - "8080:8080"
                 volumes:
-                        - type: volume
-                          source: worker_storage
+                        - type: bind
+                          source: /var/jenkins_home
                           target: /var/jenkins_home
                         - type: bind
                           source: /var/run/docker.sock
@@ -31,7 +31,5 @@ services:
                           source: /etc/letsencrypt
                           target: /etc/letsencrypt
 
-volumes:
-        worker_storage:
 
 
