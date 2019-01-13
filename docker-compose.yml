@@ -19,7 +19,7 @@ services:
                         - "8080:8080"
                 volumes:
                         - type: bind
-                          source: ${AMTN_WORKER_WORKDIR_IN_HOST}
+                          source: ${AMTN_WORKER_WORKDIR}
                           target: ${AMTN_WORKER_WORKDIR}
                         - type: bind
                           source: /var/run/docker.sock
@@ -30,6 +30,8 @@ services:
                         - type: bind
                           source: ${AMTN_FRONT_CERTDIR_IN_HOST}
                           target: /etc/letsencrypt
+                environment:
+                        - JENKINS_HOME=${AMTN_WORKER_WORKDIR}
 
 
 

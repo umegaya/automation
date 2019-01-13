@@ -1,4 +1,4 @@
-FROM jenkins
+FROM jenkins/jenkins:lts
 
 # install docker to run docker commands from jenkins container
 ENV DOCKER_VERSION=18.06.1-ce
