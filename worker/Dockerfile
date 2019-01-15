@@ -15,6 +15,6 @@ RUN curl -L https://github.com/docker/machine/releases/download/$DOCKER_MACHINE_
 
 # install js execution environment
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - 
-RUN apt install nodejs && npm install -g n yarn && n latest
+RUN apt install nodejs && npm install -g n yarn && n lts
 
 USER jenkins
