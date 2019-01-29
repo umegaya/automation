@@ -17,4 +17,8 @@ RUN curl -L https://github.com/docker/machine/releases/download/$DOCKER_MACHINE_
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - 
 RUN apt install nodejs && npm install -g n yarn && n lts
 
+# install git-lfs
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+RUN apt-get install git-lfs && git lfs install
+
 USER jenkins
