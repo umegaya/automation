@@ -5,6 +5,10 @@ services:
                 ports:
                         - "80:80"
                         - "443:443"
+                logging:
+                        options:
+                                max-size: "10m"
+                                max-file: "3"
                 volumes:
                         - type: bind
                           source: ${AMTN_FRONT_CERTDIR_IN_HOST}
@@ -17,6 +21,10 @@ services:
                 command: --prefix=/worker/8080
                 ports:
                         - "8080:8080"
+                logging:
+                        options:
+                                max-size: "10m"
+                                max-file: "3"
                 volumes:
                         - type: bind
                           source: ${AMTN_WORKER_WORKDIR}
@@ -30,8 +38,12 @@ services:
                         - type: bind
                           source: ${AMTN_FRONT_CERTDIR_IN_HOST}
                           target: /etc/letsencrypt
+                        - type: bind
+                          source: ${HOME}/.ssh
+                          target: /var/jenkins_home/.ssh
                 environment:
                         - JENKINS_HOME=${AMTN_WORKER_WORKDIR}
+                        - HOST_SSH=${AMTN_WORKER_HOST_SSH}
 
 
 

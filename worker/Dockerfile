@@ -21,4 +21,7 @@ RUN apt install nodejs && npm install -g n yarn && n lts
 RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
 RUN apt-get install git-lfs && git lfs install
 
+# install jq
+RUN curl -o /usr/bin/jq -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 && chmod +x /usr/bin/jq
+
 USER jenkins
