@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+        slave:
+                image: ${AMTN_SLAVE_IMAGE}
+                ports:
+                        - "2022:22"
+                logging:
+                        options:
+                                max-size: "10m"
+                                max-file: "3"
+                volumes:
+                        - type: bind
+                          source: ${AMTN_WORKER_WORKDIR}
+                          target: ${AMTN_WORKER_WORKDIR}
+                        - type: bind
+                          source: /var/run/docker.sock
+                          target: /var/run/docker.sock
+                        - type: bind
+                          source: ${HOME}/.docker/machine
+                          target: /root/.docker/machine
+                        - type: bind
+                          source: ${HOME}/.ssh
+                          target: /home/slave/.ssh
+                environment:
+                        - JENKINS_HOME=${AMTN_WORKER_WORKDIR}
+                        - HOST_SSH=${AMTN_WORKER_HOST_SSH}
